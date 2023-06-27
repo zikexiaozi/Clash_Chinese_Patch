@@ -144,3 +144,14 @@ jobs:
         with:
           name: app-${{ inputs.version }}
           path: ./Build/app.asar
+          
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::${{ inputs.version }}"
+          echo "::set-output name=status::success"
+
+      - name: Upload firmware to release
+        uses: softprops/action-gh-release@v1
+          name: app-${{ inputs.version }}
+          path: ./Build/app.asar
