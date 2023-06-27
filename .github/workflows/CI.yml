@@ -178,20 +178,3 @@ jobs:
         with:
           name: app-${{ inputs.version }}
           path: ./Build/app.asar
-
-          
-    - name: Generate release tag
-      id: tag
-      run: |
-        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-        echo "::set-output name=status::success"
-
-    - name: Upload firmware to release
-      uses: softprops/action-gh-release@v1
-      if: steps.tag.outputs.status == 'success' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: app-${{ inputs.version }}
-        body_path: release.txt
-        path: ./Build/app.asar
