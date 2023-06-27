@@ -88,6 +88,7 @@ jobs:
             下载 `app.7z` 或 `app.zip` 文件(*两个压缩包内容一样*)后，解压压缩包，请自行替换下列路径中的 `app.asar` 文件
 
             `Clash for Windows\resources\app.asar`
+            
   manual:
     name: Manual
     if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -148,9 +149,6 @@ jobs:
       id: tag
       run: |
         echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-        touch release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
 
     - name: Upload firmware to release
