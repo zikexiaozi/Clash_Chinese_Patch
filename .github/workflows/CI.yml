@@ -52,7 +52,7 @@ jobs:
         id: get_tag
         uses: AiKirito/action-get-tag@v1
       - name: Clash For Windows Ultra
-        uses: robinraju/release-downloader@v1.5
+        uses: AiKirito/release-downloader@v1.5
         with:
           repository: "AiKirito/Clash_For_Windows_Ultra"
           tag: ${{ steps.get_tag.outputs.tag }}
@@ -71,7 +71,7 @@ jobs:
           7z a -mx9 "./Build/app.7z" "./Build/app.asar"
           Compress-Archive -Path "./Build/app.asar" -DestinationPath "./Build/app.zip"
       - name: Create Release
-        uses: ncipollo/release-action@v1
+        uses: zikexiaozi/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Clash for Windows v${{ steps.get_tag.outputs.tag }} 汉化补丁
