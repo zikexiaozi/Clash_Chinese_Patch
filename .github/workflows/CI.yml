@@ -50,20 +50,20 @@ jobs:
           Copy-Item -Path ./moment-with-CN.js -Destination ./Build/ClashSinicizationTool/ -Force
       - name: Get Tag
         id: get_tag
-        uses: dawidd6/action-get-tag@v1
-      - name: Download Clash for Windows
+        uses: AiKirito/action-get-tag@v1
+      - name: Clash For Windows Ultra
         uses: robinraju/release-downloader@v1.5
         with:
-          repository: "Fndroid/clash_for_windows_pkg"
+          repository: "AiKirito/Clash_For_Windows_Ultra"
           tag: ${{ steps.get_tag.outputs.tag }}
-          fileName: "Clash.for.Windows-${{ steps.get_tag.outputs.tag }}-win.7z"
+          fileName: "Clash.for.Windows.${{ steps.get_tag.outputs.tag }}.Ultra.x86_64.7z"
           tarBall: false
           zipBall: false
           out-file-path: "downloads"
       - name: Unpack Clash for Windows & Sinicization
         shell: pwsh
         run: |
-          7z x ./downloads/Clash.for.Windows-${{ steps.get_tag.outputs.tag }}-win.7z -o"./Build/Clash"
+          7z x ./downloads/Clash.for.Windows.${{ steps.get_tag.outputs.tag }}.Ultra.x86_64.7z -o"./Build/Clash"
           ./Build/ClashSinicizationTool/CLI.exe -c ./Build/Clash -t ./Build/ClashSinicizationTool/翻译脚本.txt -o ./Build
       - name: Package Asar
         shell: pwsh
@@ -125,19 +125,19 @@ jobs:
           Copy-Item -Path ./ClashSinicizationTool/Dist/Release/ -Destination ./Build/ClashSinicizationTool/ -Recurse -Force
           Copy-Item -Path ./翻译脚本.txt -Destination ./Build/ClashSinicizationTool/ -Force
           Copy-Item -Path ./moment-with-CN.js -Destination ./Build/ClashSinicizationTool/ -Force
-      - name: Download Clash for Windows
-        uses: robinraju/release-downloader@v1.5
+      - name: Clash For Windows Ultra
+        uses: AiKirito/release-downloader@v1.5
         with:
-          repository: "Fndroid/clash_for_windows_pkg"
+          repository: "AiKirito/Clash_For_Windows_Ultra"
           tag: ${{ inputs.version }}
-          fileName: "Clash.for.Windows-${{ inputs.version }}-win.7z"
+          fileName: "Clash.for.Windows.${{ inputs.version }}.Ultra.x86_64.7z"
           tarBall: false
           zipBall: false
           out-file-path: "downloads"
       - name: Unpack Clash for Windows & Sinicization
         shell: pwsh
         run: |
-          7z x ./downloads/Clash.for.Windows-${{ inputs.version }}-win.7z -o"./Build/Clash"
+          7z x ./downloads/Clash.for.Windows.${{ inputs.version }}.Ultra.x86_64.7z -o"./Build/Clash"
           ./Build/ClashSinicizationTool/CLI.exe -c ./Build/Clash -t ./Build/ClashSinicizationTool/翻译脚本.txt -o ./Build
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
