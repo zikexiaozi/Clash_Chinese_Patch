@@ -52,7 +52,7 @@ jobs:
         id: get_tag
         uses: AiKirito/action-get-tag@v1
       - name: Clash For Windows Ultra
-        uses: AiKirito/release-downloader@v1.5
+        uses: AiKirito/Clash_For_Windows_Ultra@v1.5
         with:
           repository: "AiKirito/Clash_For_Windows_Ultra"
           tag: ${{ steps.get_tag.outputs.tag }}
